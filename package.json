@@ -1,0 +1,32 @@
+{
+  "name": "namaste-react-2",
+  "version": "1.0.0",
+  "description": "This is Namaste React by Prerak Parekh part 2",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pmparekh2000/namaste-react-2.git"
+  },
+  "keywords": [],
+  "author": "Prerak Parekh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pmparekh2000/namaste-react-2/issues"
+  },
+  "homepage": "https://github.com/Pmparekh2000/namaste-react-2#readme",
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "browserslist": [
+    "last 10 Chrome version"
+  ]
+}
