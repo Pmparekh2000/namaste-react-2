@@ -72,3 +72,7 @@
   padding: 0 20px;
   cursor: pointer;
 }
+
+.filter-restaurant {
+  display: flex;
+}

@@ -1,11 +1,20 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import {
+  COMMA,
+  RATING,
+  REMOVE_FILTER,
+  SEARCH,
+  SPACE,
+  TOP_RATED_RESTAURANTS,
+} from "../util/constants";
 
 const Body = () => {
   const [restaurants, setRestuarants] = useState(null);
   const [displayRestaurants, setDisplayRestaurants] = useState(null);
   const [filteredRestaurants, setFilteredRestaurants] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   const getRestaurantData = async () => {
     const restaurantsReadableStream = await fetch(
@@ -41,10 +50,17 @@ const Body = () => {
   }, [restaurants]);
 
   const getTopRatedRestuarants = () => {
-    const topRatedRestaurants = displayRestaurants.filter(
+    const topRatedRestaurants = filteredRestaurants.filter(
       (restaurant) => restaurant.avgRating > 4.5
     );
     setFilteredRestaurants(topRatedRestaurants);
+  };
+
+  const searchRestaurants = () => {
+    const searchedRestaurants = displayRestaurants.filter((restaurant) =>
+      restaurant.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredRestaurants(searchedRestaurants);
   };
 
   const removeAllFilters = () => {
@@ -55,18 +71,26 @@ const Body = () => {
     <div className="body">
       <div className="filter">
         {filteredRestaurants ? (
-          <button
-            className="filter-button"
-            onClick={() => getTopRatedRestuarants()}
-          >
-            Top Rated Restaurants
-          </button>
+          <div className="filter-restaurant">
+            <button
+              className="filter-button"
+              onClick={() => getTopRatedRestuarants()}
+            >
+              {TOP_RATED_RESTAURANTS}
+            </button>
+            <input
+              type="text"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+            <button onClick={() => searchRestaurants()}>{SEARCH}</button>
+          </div>
         ) : (
           <></>
         )}
       </div>
       <div>
-        <button onClick={() => removeAllFilters()}>Remove Filter</button>
+        <button onClick={() => removeAllFilters()}>{REMOVE_FILTER}</button>
       </div>
       <div className="res-container">
         {filteredRestaurants ? (
@@ -76,8 +100,8 @@ const Body = () => {
                 key={restaurant.id}
                 name={restaurant.name}
                 areaName={restaurant.areaName}
-                cuisines={restaurant.cuisines.join(", ")}
-                avgRating={restaurant.avgRating + " rating"}
+                cuisines={restaurant.cuisines.join(COMMA + SPACE)}
+                avgRating={restaurant.avgRating + SPACE + RATING}
                 eta={restaurant.eta}
                 cloudinaryImageId={restaurant.cloudinaryImageId}
                 costForTwo={restaurant.costForTwo}
