@@ -55,3 +55,20 @@
   margin: 10px;
   cursor: pointer;
 }
+
+.shimmer-card {
+  background-color: #f0f0f0;
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.shimmer-screen {
+  display: flex;
+}
+
+.login-button {
+  padding: 0 20px;
+  cursor: pointer;
+}

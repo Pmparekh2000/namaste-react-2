@@ -1,6 +1,21 @@
-import { LOGO_URL } from "../util/constants";
+import {
+  ABOUT_US,
+  CART,
+  CONTACT_US,
+  HOME,
+  LOGIN,
+  LOGO_URL,
+  LOGOUT,
+} from "../util/constants";
+import { useState } from "react";
 
 const Header = () => {
+  const [loginButton, setLoginButton] = useState(LOGIN);
+  const updateLoginButton = () => {
+    setLoginButton((prevValue) => {
+      return prevValue === LOGIN ? LOGOUT : LOGIN;
+    });
+  };
   return (
     <div className="header">
       <div className="logo-container">
@@ -8,10 +23,13 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
+          <li>{HOME}</li>
+          <li>{ABOUT_US}</li>
+          <li>{CONTACT_US}</li>
+          <li>{CART}</li>
+          <button className="login-button" onClick={() => updateLoginButton()}>
+            {loginButton}
+          </button>
         </ul>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [restaurants, setRestuarants] = useState(null);
@@ -84,7 +85,7 @@ const Body = () => {
             );
           })
         ) : (
-          <h1>Loading</h1>
+          <Shimmer />
         )}
       </div>
     </div>
