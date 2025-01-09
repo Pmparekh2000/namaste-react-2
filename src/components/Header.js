@@ -8,6 +8,7 @@ import {
   LOGOUT,
 } from "../util/constants";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const Header = () => {
   const [loginButton, setLoginButton] = useState(LOGIN);
@@ -23,10 +24,18 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li>{HOME}</li>
-          <li>{ABOUT_US}</li>
-          <li>{CONTACT_US}</li>
-          <li>{CART}</li>
+          <li>
+            <Link to="/">{HOME}</Link>
+          </li>
+          <li>
+            <Link to="/about">{ABOUT_US}</Link>
+          </li>
+          <li>
+            <Link to="/contact">{CONTACT_US}</Link>
+          </li>
+          <li>
+            <Link to="/cart">{CART}</Link>
+          </li>
           <button className="login-button" onClick={() => updateLoginButton()}>
             {loginButton}
           </button>
