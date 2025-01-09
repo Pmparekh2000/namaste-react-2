@@ -76,3 +76,12 @@
 .filter-restaurant {
   display: flex;
 }
+
+.menu-data {
+  display: flex;
+}
+
+.menu-info {
+  display: flex;
+  flex-direction: row;
+}

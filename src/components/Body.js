@@ -9,6 +9,7 @@ import {
   SPACE,
   TOP_RATED_RESTAURANTS,
 } from "../util/constants";
+import { Link } from "react-router";
 
 const Body = () => {
   const [restaurants, setRestuarants] = useState(null);
@@ -96,16 +97,17 @@ const Body = () => {
         {filteredRestaurants ? (
           filteredRestaurants.map((restaurant) => {
             return (
-              <RestaurantCard
-                key={restaurant.id}
-                name={restaurant.name}
-                areaName={restaurant.areaName}
-                cuisines={restaurant.cuisines.join(COMMA + SPACE)}
-                avgRating={restaurant.avgRating + SPACE + RATING}
-                eta={restaurant.eta}
-                cloudinaryImageId={restaurant.cloudinaryImageId}
-                costForTwo={restaurant.costForTwo}
-              />
+              <Link to={"/restaurant/" + restaurant.id} key={restaurant.id}>
+                <RestaurantCard
+                  name={restaurant.name}
+                  areaName={restaurant.areaName}
+                  cuisines={restaurant.cuisines.join(COMMA + SPACE)}
+                  avgRating={restaurant.avgRating + SPACE + RATING}
+                  eta={restaurant.eta}
+                  cloudinaryImageId={restaurant.cloudinaryImageId}
+                  costForTwo={restaurant.costForTwo}
+                />
+              </Link>
             );
           })
         ) : (
