@@ -1,5 +1,17 @@
+import User from "./User";
+import UserClass from "./UserClass";
+
 const About = () => {
-  return <h1>Hello from About Us</h1>;
+  return (
+    <div>
+      <User name={"Prerak"} location={"Mumbai"} />
+      <UserClass
+        name={"Prerak class"}
+        location={"Mumbai class"}
+        userName={"Pmparekh2000 class"}
+      />
+    </div>
+  );
 };
 
 export default About;
