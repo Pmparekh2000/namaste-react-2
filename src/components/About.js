@@ -4,7 +4,6 @@ import UserClass from "./UserClass";
 const About = () => {
   return (
     <div>
-      <User name={"Prerak"} location={"Mumbai"} />
       <UserClass
         name={"Prerak class"}
         location={"Mumbai class"}
