@@ -6,8 +6,25 @@ class UserClass extends React.Component {
     this.state = {
       count: 10,
       name1: "Siddhi",
+      githubData: null,
     };
   }
+
+  async componentDidMount() {
+    const readableStream = await fetch(
+      "https://api.github.com/users/pmparekh2000"
+    );
+    const data = await readableStream.json();
+    this.setState({
+      githubData: data,
+    });
+    console.log("From componentDidMount");
+  }
+
+  componentDidUpdate() {
+    console.log("Called componentDid Update");
+  }
+
   render() {
     const { name, location, userName } = this.props;
     const { count, name1 } = this.state;
@@ -25,12 +42,10 @@ class UserClass extends React.Component {
     };
     return (
       <div className="user-card">
-        <h1>Count = {count}</h1>
-        <h2>
-          Name: {name} - {name1}
-        </h2>
-        <h3>Location: {location}</h3>
-        <h4>Contact: {userName}</h4>
+        <h1>Count = {this.state.githubData?.name}</h1>
+        <h2>{this.state.githubData?.login}</h2>
+        <h3>Location: {this.state.githubData?.url}</h3>
+        <h4>Contact: {this.state.githubData?.type}</h4>
         <button onClick={() => updateName("Rekha")}>Update Name</button>
       </div>
     );

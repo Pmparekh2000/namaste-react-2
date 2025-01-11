@@ -3,25 +3,25 @@ import { useParams } from "react-router";
 import Shimmer from "./Shimmer";
 import { IMAGE_CDN } from "../util/constants";
 import MenuItem from "./MenuItem";
+import useRestaurantMenu from "../util/useRestaurantMenu";
+import useOnlineStatus from "../util/useOnlineStatus";
 
 const RestaurantMenu = (props) => {
   const [menuData, setMenuData] = useState(null);
+  const [onlineStatus, setOnlineStatus] = useState(true);
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   const [menuItems, setMenuItems] = useState(null);
   const { restaurantId } = useParams();
 
-  const getRestaurantData = async () => {
-    const readableStream = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.981607&lng=77.6958882&restaurantId=${restaurantId}&catalog_qa=undefined&submitAction=ENTER`
-    );
-    const restaurantMenuData = await readableStream.json();
-    console.log("restaurantMenuData menu data obtained is", restaurantMenuData);
-
-    setMenuData(restaurantMenuData);
-  };
+  const onlineStatusValue = useOnlineStatus();
   useEffect(() => {
-    getRestaurantData();
-  }, []);
+    setOnlineStatus(onlineStatusValue);
+  }, [onlineStatusValue]);
+
+  const restaurantData = useRestaurantMenu(restaurantId);
+  useEffect(() => {
+    setMenuData(restaurantData);
+  }, [restaurantData]);
 
   useEffect(() => {
     console.log(menuData?.data.cards[2].card.card.info);
@@ -32,6 +32,15 @@ const RestaurantMenu = (props) => {
         .card.itemCards
     );
   }, [menuData]);
+
+  if (!onlineStatus) {
+    return (
+      <div>
+        <div>You seem to be offline</div>
+        <div>Please check you internet connection</div>
+      </div>
+    );
+  }
 
   return menuData ? (
     <div className="menu">
