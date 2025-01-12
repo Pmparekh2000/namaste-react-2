@@ -39,7 +39,7 @@ const Body = () => {
         id: restaurantInfo.id,
         name: restaurantInfo.name,
         areaName: restaurantInfo.areaName,
-        cuisines: restaurantInfo.cuisines,
+        cuisines: restaurantInfo.cuisines.slice(0, 2),
         eta: restaurantInfo.sla.slaString,
         avgRating: restaurantInfo.avgRating,
         cloudinaryImageId: restaurantInfo.cloudinaryImageId,
@@ -70,30 +70,45 @@ const Body = () => {
 
   return (
     <div className="body">
-      <div className="filter">
-        {filteredRestaurants ? (
-          <div className="filter-restaurant">
-            <button
-              className="filter-button"
-              onClick={() => getTopRatedRestuarants()}
-            >
-              {TOP_RATED_RESTAURANTS}
-            </button>
-            <input
-              type="text"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            <button onClick={() => searchRestaurants()}>{SEARCH}</button>
-          </div>
-        ) : (
-          <></>
-        )}
+      <div className="flex">
+        <div className="flex">
+          {filteredRestaurants ? (
+            <div className="flex">
+              <button
+                className="px-4 py-2 bg-green-200 my-6 rounded-xl"
+                onClick={() => getTopRatedRestuarants()}
+              >
+                {TOP_RATED_RESTAURANTS}
+              </button>
+              <div className="">
+                <input
+                  type="text"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  className="m-4 p-4 border-black"
+                />
+              </div>
+              <button
+                className="px-4 py-2 bg-green-200 m-4 rounded-xl"
+                onClick={() => searchRestaurants()}
+              >
+                {SEARCH}
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div>
+          <button
+            className="px-4 py-2 bg-green-200 my-6 rounded-xl"
+            onClick={() => removeAllFilters()}
+          >
+            {REMOVE_FILTER}
+          </button>
+        </div>
       </div>
-      <div>
-        <button onClick={() => removeAllFilters()}>{REMOVE_FILTER}</button>
-      </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurants ? (
           filteredRestaurants.map((restaurant) => {
             return (
