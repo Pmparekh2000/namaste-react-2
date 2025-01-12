@@ -2,6 +2,7 @@ import {
   ABOUT_US,
   CART,
   CONTACT_US,
+  GROCERY,
   HOME,
   LOGIN,
   LOGO_URL,
@@ -42,6 +43,9 @@ const Header = () => {
           </li>
           <li>
             <Link to="/contact">{CONTACT_US}</Link>
+          </li>
+          <li>
+            <Link to="/grocery">{GROCERY}</Link>
           </li>
           <li>
             <Link to="/cart">{CART}</Link>

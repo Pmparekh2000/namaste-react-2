@@ -7,6 +7,7 @@ export const LOGOUT = "Logout";
 export const HOME = "Home";
 export const ABOUT_US = "About Us";
 export const CONTACT_US = "Contact Us";
+export const GROCERY = "Grocery";
 export const CART = "Cart";
 export const SEARCH = "Search";
 export const TOP_RATED_RESTAURANTS = "Top Rated Restaurants";
