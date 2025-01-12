@@ -1,4 +1,6 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {
+  restaurantCardWithRecommendedLabel,
+} from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import {
@@ -16,6 +18,8 @@ const Body = () => {
   const [displayRestaurants, setDisplayRestaurants] = useState(null);
   const [filteredRestaurants, setFilteredRestaurants] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const RestaurantCardWithRecommendedLabel =
+    restaurantCardWithRecommendedLabel(RestaurantCard);
 
   const getRestaurantData = async () => {
     const restaurantsReadableStream = await fetch(
@@ -52,7 +56,7 @@ const Body = () => {
 
   const getTopRatedRestuarants = () => {
     const topRatedRestaurants = filteredRestaurants.filter(
-      (restaurant) => restaurant.avgRating > 4.5
+      (restaurant) => restaurant.avgRating >= 4.5
     );
     setFilteredRestaurants(topRatedRestaurants);
   };
@@ -113,15 +117,27 @@ const Body = () => {
           filteredRestaurants.map((restaurant) => {
             return (
               <Link to={"/restaurant/" + restaurant.id} key={restaurant.id}>
-                <RestaurantCard
-                  name={restaurant.name}
-                  areaName={restaurant.areaName}
-                  cuisines={restaurant.cuisines.join(COMMA + SPACE)}
-                  avgRating={restaurant.avgRating + SPACE + RATING}
-                  eta={restaurant.eta}
-                  cloudinaryImageId={restaurant.cloudinaryImageId}
-                  costForTwo={restaurant.costForTwo}
-                />
+                {restaurant.avgRating >= 4.5 ? (
+                  <RestaurantCardWithRecommendedLabel
+                    name={restaurant.name}
+                    areaName={restaurant.areaName}
+                    cuisines={restaurant.cuisines.join(COMMA + SPACE)}
+                    avgRating={restaurant.avgRating + SPACE + RATING}
+                    eta={restaurant.eta}
+                    cloudinaryImageId={restaurant.cloudinaryImageId}
+                    costForTwo={restaurant.costForTwo}
+                  />
+                ) : (
+                  <RestaurantCard
+                    name={restaurant.name}
+                    areaName={restaurant.areaName}
+                    cuisines={restaurant.cuisines.join(COMMA + SPACE)}
+                    avgRating={restaurant.avgRating + SPACE + RATING}
+                    eta={restaurant.eta}
+                    cloudinaryImageId={restaurant.cloudinaryImageId}
+                    costForTwo={restaurant.costForTwo}
+                  />
+                )}
               </Link>
             );
           })
