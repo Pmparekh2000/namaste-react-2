@@ -117,7 +117,7 @@ const Body = () => {
           filteredRestaurants.map((restaurant) => {
             return (
               <Link to={"/restaurant/" + restaurant.id} key={restaurant.id}>
-                {restaurant.avgRating >= 4.5 ? (
+                {restaurant.avgRating >= 4.4 ? (
                   <RestaurantCardWithRecommendedLabel
                     name={restaurant.name}
                     areaName={restaurant.areaName}

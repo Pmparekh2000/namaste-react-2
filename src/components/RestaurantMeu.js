@@ -5,6 +5,7 @@ import { IMAGE_CDN } from "../util/constants";
 import MenuItem from "./MenuItem";
 import useRestaurantMenu from "../util/useRestaurantMenu";
 import useOnlineStatus from "../util/useOnlineStatus";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = (props) => {
   const [menuData, setMenuData] = useState(null);
@@ -27,10 +28,13 @@ const RestaurantMenu = (props) => {
     console.log(menuData?.data.cards[2].card.card.info);
 
     setRestaurantInfo(menuData?.data.cards[2].card.card.info);
-    setMenuItems(
-      menuData?.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[3].card
-        .card.itemCards
-    );
+    const menuCategories =
+      menuData?.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter(
+        (card) =>
+          card?.card?.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+      );
+    setMenuItems(menuCategories);
   }, [menuData]);
 
   if (!onlineStatus) {
@@ -43,14 +47,16 @@ const RestaurantMenu = (props) => {
   }
 
   return menuData ? (
-    <div className="menu">
-      <h1>Welcome to {restaurantInfo?.name}</h1>
+    <div className="text-center">
+      <h1 className="font-bold my-6 text-2xl">
+        Welcome to {restaurantInfo?.name}
+      </h1>
       <img
         src={IMAGE_CDN + restaurantInfo?.cloudinaryImageId}
         style={{ height: "150px", width: "150px" }}
       />
       <h4>{restaurantInfo?.areaName}</h4>
-      <h4>
+      <h4 className="font-bold text-lg">
         {restaurantInfo?.cuisines.join(", ")} -{" "}
         {restaurantInfo?.costForTwoMessage}
       </h4>
@@ -60,15 +66,12 @@ const RestaurantMenu = (props) => {
       </h4>
       <h2>Menu</h2>
       <ul>
-        {menuItems?.map((menuItem) => {
-          const { id, description, imageId, name, price, defaultPrice } =
-            menuItem.card.info;
-          return (
-            <li key={id}>
-              {name} - Rs. {defaultPrice ? defaultPrice / 100 : price / 100}
-            </li>
-          );
-        })}
+        {menuItems?.map((menuItem) => (
+          <RestaurantCategory
+            key={menuItem?.card?.card?.title}
+            menuItem={menuItem?.card?.card}
+          />
+        ))}
       </ul>
     </div>
   ) : (
