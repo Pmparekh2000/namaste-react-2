@@ -8,13 +8,16 @@ import {
   LOGO_URL,
   LOGOUT,
 } from "../util/constants";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../util/useOnlineStatus";
+import UserContext from "../util/UserContext";
 
 const Header = () => {
   const [loginButton, setLoginButton] = useState(LOGIN);
   const [internetStatus, setInternetStatus] = useState(true);
+  const data = useContext(UserContext);
+  console.log("data obtained is", data);
 
   const updateLoginButton = () => {
     setLoginButton((prevValue) => {
@@ -53,6 +56,7 @@ const Header = () => {
           <button className="login-button" onClick={() => updateLoginButton()}>
             {loginButton}
           </button>
+          <li className="px-4 font-bold">{data?.loggedInUser}</li>
         </ul>
       </div>
     </div>

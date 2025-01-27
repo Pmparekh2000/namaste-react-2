@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Shimmer from "./Shimmer";
 import { IMAGE_CDN } from "../util/constants";
-import MenuItem from "./MenuItem";
 import useRestaurantMenu from "../util/useRestaurantMenu";
 import useOnlineStatus from "../util/useOnlineStatus";
 import RestaurantCategory from "./RestaurantCategory";

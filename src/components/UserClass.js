@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../util/UserContext";
 
 class UserClass extends React.Component {
   constructor(props) {
@@ -47,6 +48,9 @@ class UserClass extends React.Component {
         <h3>Location: {this.state.githubData?.url}</h3>
         <h4>Contact: {this.state.githubData?.type}</h4>
         <button onClick={() => updateName("Rekha")}>Update Name</button>
+        <UserContext.Consumer>
+          {(data) => <h1 className="font-bold">{data?.loggedInUser}</h1>}
+        </UserContext.Consumer>
       </div>
     );
   }

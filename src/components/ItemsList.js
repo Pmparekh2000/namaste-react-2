@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { IMAGE_CDN } from "../util/constants";
+import UserContext from "../util/UserContext";
 
 const ItemsList = (props) => {
   const { itemInfo } = props;
+  const userData = useContext(UserContext);
 
   return (
     <div className="border-b-2 border-gray-400 text-left">
@@ -20,6 +23,7 @@ const ItemsList = (props) => {
             style={{ height: "75px", width: "125px" }}
             className="w-full"
           />
+          <p className="font-bold">{userData?.loggedInUser}</p>
         </div>
       </div>
     </div>

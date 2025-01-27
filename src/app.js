@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMeu";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./util/UserContext";
 
 /**
  * Header
@@ -33,11 +34,28 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
+  const [userInfo, setUserInfo] = useState();
+  const getUserInfo = async () => {
+    // Make an API call to get the user info by axios or fetch
+    const userData = {
+      name: "Prerak Parekh",
+    };
+    setUserInfo(userData.name);
+  };
+  // Authentication
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userInfo }}>
+      <div className="app">
+        <UserContext.Provider value={{ loggedInUser: "Siddhi Parekh" }}>
+          <Header />
+        </UserContext.Provider>
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 

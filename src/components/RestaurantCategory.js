@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ItemsList from "./ItemsList";
 
 const RestaurantCategory = (props) => {
