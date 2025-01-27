@@ -12,6 +12,7 @@ const RestaurantMenu = (props) => {
   const [onlineStatus, setOnlineStatus] = useState(true);
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   const [menuItems, setMenuItems] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(0);
   const { restaurantId } = useParams();
 
   const onlineStatusValue = useOnlineStatus();
@@ -69,10 +70,15 @@ const RestaurantMenu = (props) => {
       </h4>
       <h2>Menu</h2>
       <ul>
-        {menuItems?.map((menuItem) => (
+        {/* RestaurantCategory is now a controlled component */}
+        {menuItems?.map((menuItem, index) => (
           <RestaurantCategory
             key={menuItem?.card?.card?.title}
             menuItem={menuItem?.card?.card}
+            index={index}
+            expandedIndex={expandedIndex}
+            isExpandedIndex={expandedIndex === index}
+            setExpandedIndex={setExpandedIndex}
           />
         ))}
       </ul>

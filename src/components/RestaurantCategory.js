@@ -2,13 +2,11 @@ import { useState } from "react";
 import ItemsList from "./ItemsList";
 
 const RestaurantCategory = (props) => {
-  const { menuItem } = props;
-  const [hiddenState, setHiddenState] = useState("hidden");
-  const [arrowValue, setArrowValue] = useState(true);
+  const { menuItem, index, isExpandedIndex, expandedIndex, setExpandedIndex } =
+    props;
 
   const toggleItemsView = () => {
-    setHiddenState((prevValue) => (prevValue === "hidden" ? "" : "hidden"));
-    setArrowValue((prevValue) => !prevValue);
+    setExpandedIndex(index === expandedIndex ? null : index);
   };
 
   return (
@@ -21,16 +19,17 @@ const RestaurantCategory = (props) => {
           <span className="font-bold text-lg">
             {menuItem?.title} ({menuItem?.itemCards?.length || 0})
           </span>
-          <span className="">{arrowValue ? "⬇️" : "⬆️"}</span>
+          <span className="">{isExpandedIndex ? "⬆️" : "⬇️"}</span>
         </div>
         <div>
-          {menuItem?.itemCards.map((itemCard) => {
-            return (
-              <div key={itemCard?.card?.info?.id} className={hiddenState}>
-                <ItemsList itemInfo={itemCard?.card?.info} />
-              </div>
-            );
-          })}
+          {isExpandedIndex &&
+            menuItem?.itemCards.map((itemCard) => {
+              return (
+                <div key={itemCard?.card?.info?.id}>
+                  <ItemsList itemInfo={itemCard?.card?.info} />
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
