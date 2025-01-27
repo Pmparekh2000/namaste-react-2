@@ -52,7 +52,10 @@ const RestaurantMenu = (props) => {
         Welcome to {restaurantInfo?.name}
       </h1>
       <img
-        src={IMAGE_CDN + restaurantInfo?.cloudinaryImageId}
+        src={
+          IMAGE_CDN +
+          (restaurantInfo?.cloudinaryImageId || restaurantInfo?.imageId)
+        }
         style={{ height: "150px", width: "150px" }}
       />
       <h4>{restaurantInfo?.areaName}</h4>
