@@ -34,7 +34,7 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState("");
   const getUserInfo = async () => {
     // Make an API call to get the user info by axios or fetch
     const userData = {
@@ -48,11 +48,11 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userInfo }}>
+    <UserContext.Provider
+      value={{ loggedInUser: userInfo, setUserInfo: setUserInfo }}
+    >
       <div className="app">
-        <UserContext.Provider value={{ loggedInUser: "Siddhi Parekh" }}>
-          <Header />
-        </UserContext.Provider>
+        <Header />
         <Outlet />
       </div>
     </UserContext.Provider>

@@ -16,8 +16,7 @@ import UserContext from "../util/UserContext";
 const Header = () => {
   const [loginButton, setLoginButton] = useState(LOGIN);
   const [internetStatus, setInternetStatus] = useState(true);
-  const data = useContext(UserContext);
-  console.log("data obtained is", data);
+  const { loggedInUser, setUserInfo } = useContext(UserContext);
 
   const updateLoginButton = () => {
     setLoginButton((prevValue) => {
@@ -56,7 +55,7 @@ const Header = () => {
           <button className="login-button" onClick={() => updateLoginButton()}>
             {loginButton}
           </button>
-          <li className="px-4 font-bold">{data?.loggedInUser}</li>
+          <li className="px-4 font-bold">{loggedInUser}</li>
         </ul>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import RestaurantCard, {
   restaurantCardWithRecommendedLabel,
 } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import {
   COMMA,
@@ -12,6 +12,7 @@ import {
   TOP_RATED_RESTAURANTS,
 } from "../util/constants";
 import { Link } from "react-router";
+import UserContext from "../util/UserContext";
 
 const Body = () => {
   const [restaurants, setRestuarants] = useState(null);
@@ -20,6 +21,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const RestaurantCardWithRecommendedLabel =
     restaurantCardWithRecommendedLabel(RestaurantCard);
+  const { loggedInUser, setUserInfo } = useContext(UserContext);
 
   const getRestaurantData = async () => {
     const restaurantsReadableStream = await fetch(
@@ -110,6 +112,14 @@ const Body = () => {
           >
             {REMOVE_FILTER}
           </button>
+        </div>
+        <div className="py-5">
+          <label className="font-bold">User Name</label>
+          <input
+            className="border border-b mx-2"
+            value={loggedInUser}
+            onChange={(e) => setUserInfo(e.target.value)}
+          />
         </div>
       </div>
       <div className="flex flex-wrap">

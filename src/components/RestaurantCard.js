@@ -33,9 +33,9 @@ export const restaurantCardWithRecommendedLabel = (RestaurantCard) => {
   return (props) => {
     return (
       <div className="hover:scale-105 transition-transform hover:-translate-y-2">
-        <lable className="absolute bg-black text-white p-2 m-2 rounded-lg">
+        <label className="absolute bg-black text-white p-2 m-2 rounded-lg">
           Recommended
-        </lable>
+        </label>
         <RestaurantCard {...props} />
       </div>
     );
