@@ -12,11 +12,22 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../util/useOnlineStatus";
 import UserContext from "../util/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [loginButton, setLoginButton] = useState(LOGIN);
   const [internetStatus, setInternetStatus] = useState(true);
   const { loggedInUser, setUserInfo } = useContext(UserContext);
+  const cart = useSelector((store) => store?.cart);
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  let cartCount = 0;
+
+  useEffect(() => {
+    cart.map((item) => {
+      cartCount += item?.items.length;
+    });
+    setCartItemsCount(cartCount);
+  }, [cart]);
 
   const updateLoginButton = () => {
     setLoginButton((prevValue) => {
@@ -49,10 +60,16 @@ const Header = () => {
           <li className="px-4">
             <Link to="/grocery">{GROCERY}</Link>
           </li>
-          <li className="px-4">
+          <li className="px-1">
             <Link to="/cart">{CART}</Link>
           </li>
-          <button className="login-button" onClick={() => updateLoginButton()}>
+          <li className="">
+            <span>{cartItemsCount}</span>
+          </li>
+          <button
+            className="login-button px-4"
+            onClick={() => updateLoginButton()}
+          >
             {loginButton}
           </button>
           <li className="px-4 font-bold">{loggedInUser}</li>

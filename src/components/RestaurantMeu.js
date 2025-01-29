@@ -25,8 +25,6 @@ const RestaurantMenu = (props) => {
   }, [restaurantData]);
 
   useEffect(() => {
-    console.log(menuData?.data.cards[2].card.card.info);
-
     setRestaurantInfo(menuData?.data.cards[2].card.card.info);
     const menuCategories =
       menuData?.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter(
