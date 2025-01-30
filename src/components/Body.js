@@ -54,6 +54,7 @@ const Body = () => {
     });
     setDisplayRestaurants(restaurantData);
     setFilteredRestaurants(restaurantData);
+    console.log("restaurantData is", restaurantData);
   }, [restaurants]);
 
   const getTopRatedRestuarants = () => {
