@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice";
-import userReducer from "./slices/userSlice";
+import { githubUserApi } from "./slices/userSlice";
 
 const appStore = configureStore({
   reducer: {
     cart: cartReducer,
-    user: userReducer,
+    [githubUserApi.reducerPath]: githubUserApi.reducer,
   },
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(githubUserApi.middleware),
 });
 
 export default appStore;

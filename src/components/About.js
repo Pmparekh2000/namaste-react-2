@@ -1,26 +1,21 @@
-import { useEffect } from "react";
-import User from "./User";
-import UserClass from "./UserClass";
-import { fetchUserInfo, resetUserInfo } from "../redux/slices/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useGetGithubUserByNameQuery } from "../redux/slices/userSlice";
 
 const About = () => {
-  const dispatch = useDispatch();
-  const userInfo = useSelector((store) => store?.user);
-
-  useEffect(() => {
-    dispatch(fetchUserInfo("pmparekh2000"));
-  }, []);
+  const { data, error, isLoading } =
+    useGetGithubUserByNameQuery("pmparekh2000");
 
   return (
     <div>
       <button onClick={() => dispatch(resetUserInfo())}>Reset user info</button>
-      {userInfo.loading ? (
+      {isLoading ? (
         <p>Loading</p>
-      ) : userInfo.userInfo ? (
-        <p>Hello</p>
+      ) : data ? (
+        <div>
+          <p>Hello</p>
+          <p>{data?.name}</p>
+        </div>
       ) : (
-        <p>Error: {userInfo.error}</p>
+        <p>Error: {error}</p>
       )}
     </div>
   );
