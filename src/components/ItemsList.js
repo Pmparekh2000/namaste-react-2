@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IMAGE_CDN } from "../util/constants";
-import UserContext from "../util/UserContext";
+// import UserContext from "../util/UserContext";
 import { useDispatch, useSelector } from "react-redux";
 import { addItems, removeItem } from "../redux/slices/cartSlice";
 
 const ItemsList = (props) => {
   const { itemInfo } = props;
-  const userData = useContext(UserContext);
+  // const userData = useContext(UserContext);
   const dispatch = useDispatch();
   const cart = useSelector((store) => store?.cart);
   const [hideRemoveButton, setHideRemoveButton] = useState("hidden");
@@ -55,7 +55,7 @@ const ItemsList = (props) => {
             style={{ height: "75px", width: "125px" }}
             className="w-full"
           />
-          <p className="font-bold">{userData?.loggedInUser}</p>
+          {/* <p className="font-bold">{userData?.loggedInUser}</p> */}
         </div>
       </div>
     </div>

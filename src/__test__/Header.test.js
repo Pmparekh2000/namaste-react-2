@@ -15,7 +15,6 @@ it("Rendering header component", () => {
   );
   const output = screen.getByRole("button");
   expect(output).toBeInTheDocument();
-  console.log("output length is ", output.length);
 });
 
 it("Shuld change login button to logout on click", () => {
@@ -27,8 +26,6 @@ it("Shuld change login button to logout on click", () => {
     </BrowserRouter>
   );
   const loginButton = screen.getByRole("button", { name: "Login" });
-  console.log("output before click is 1", loginButton);
   fireEvent.click(loginButton);
   const logoutButton = screen.getByRole("button", { name: "Logout" });
-  console.log("output after click is 2", logoutButton);
 });

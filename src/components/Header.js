@@ -8,7 +8,7 @@ import {
   LOGO_URL,
   LOGOUT,
 } from "../util/constants";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../util/useOnlineStatus";
 import UserContext from "../util/UserContext";
@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const [loginButton, setLoginButton] = useState(LOGIN);
   const [internetStatus, setInternetStatus] = useState(true);
-  const { loggedInUser, setUserInfo } = useContext(UserContext);
+  // const { loggedInUser, setUserInfo } = useContext(UserContext);
   const cart = useSelector((store) => store?.cart);
   const [cartItemsCount, setCartItemsCount] = useState(0);
   let cartCount = 0;
@@ -72,7 +72,7 @@ const Header = () => {
           >
             {loginButton}
           </button>
-          <li className="px-4 font-bold">{loggedInUser}</li>
+          {/* <li className="px-4 font-bold">{loggedInUser}</li> */}
         </ul>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import RestaurantCard, {
   restaurantCardWithRecommendedLabel,
 } from "./RestaurantCard";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import {
   COMMA,
@@ -21,7 +21,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const RestaurantCardWithRecommendedLabel =
     restaurantCardWithRecommendedLabel(RestaurantCard);
-  const { loggedInUser, setUserInfo } = useContext(UserContext);
+  // const { loggedInUser, setUserInfo } = useContext(UserContext);
 
   const getRestaurantData = async () => {
     const restaurantsReadableStream = await fetch(
@@ -54,7 +54,7 @@ const Body = () => {
     });
     setDisplayRestaurants(restaurantData);
     setFilteredRestaurants(restaurantData);
-    console.log("restaurantData is", restaurantData);
+    // console.log("restaurantData is", restaurantData);
   }, [restaurants]);
 
   const getTopRatedRestuarants = () => {
@@ -116,11 +116,11 @@ const Body = () => {
         </div>
         <div className="py-5">
           <label className="font-bold">User Name</label>
-          <input
+          {/* <input
             className="border border-b mx-2"
             value={loggedInUser}
             onChange={(e) => setUserInfo(e.target.value)}
-          />
+          /> */}
         </div>
       </div>
       <div className="flex flex-wrap">
